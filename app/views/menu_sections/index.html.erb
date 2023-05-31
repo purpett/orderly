@@ -2,4 +2,7 @@
 
 <% @menu_sections.each do |menu_section| %>
   <%= menu_section.name %>
+  <%= button_to 'Kill', menu_section_path(menu_section), method: :delete %>
 <% end %>
+
+<%= link_to 'New', new_menu_section_path %>

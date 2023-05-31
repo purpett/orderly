@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   resources :menu_sections do
     resources :items
   end
+
+  resources :orders, only: %i[index show]
+
+  get "/restaurants", to: "restaurants#show"
+  get "/order-at/:slug", as: :order_at, to: "pages#index" # TODO
 end

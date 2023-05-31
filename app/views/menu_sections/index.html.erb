@@ -8,7 +8,7 @@
     <ul>
       <% menu_section.items.each do |item| %>
         <li>
-          <%= item.name %> | <%= item.description %> | <%= item.price %> |
+          <%= item.name %> | <%= item.description %> | <%= item.price %>
           <%= button_to 'Kill bill', menu_section_item_path(menu_section, item), method: :delete %>
           <%= link_to 'Edit', edit_menu_section_item_path(menu_section, item) %>
         </li>

@@ -1,0 +1,7 @@
+<%= @restaurant.name %>
+<%= @restaurant.email %>
+<%= @restaurant.location%>
+<%= link_to 'Edit', edit_restaurant_registration_path %>
+
+<% # https://github.com/whomwah/rqrcode %>
+<%== RQRCode::QRCode.new(order_at_url(current_restaurant.slug)).as_svg %>

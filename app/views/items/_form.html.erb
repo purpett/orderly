@@ -1,0 +1,23 @@
+<%= form_with model: [@menu_section, item] do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :price %>
+    <%= f.number_field :price %>
+  </div>
+
+  <div>
+    <%= f.label :menu_section_id %>
+    <%= f.select :menu_section_id, current_restaurant.menu_sections.map { |section| [section.name, section.id] } %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

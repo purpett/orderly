@@ -5,5 +5,6 @@ class Restaurant < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :menu_sections
+  has_many :items, through: :menu_sections
   has_many :orders
 end

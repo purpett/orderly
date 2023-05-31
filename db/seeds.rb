@@ -61,3 +61,9 @@ item4 = Item.create(
 # Create some orders
 order1 = restaurant1.orders.create(customer: "Customer 1")
 order2 = restaurant2.orders.create(customer: "Customer 2")
+
+order1.items << item1
+order1.items << item2
+
+order2.items << item3
+order2.items << item4

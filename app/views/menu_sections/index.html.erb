@@ -1,0 +1,5 @@
+<%= button_to 'Logout', destroy_restaurant_session_path, method: :delete %>
+
+<% @menu_sections.each do |menu_section| %>
+  <%= menu_section.name %>
+<% end %>

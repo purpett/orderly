@@ -4,4 +4,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#index"
+
+  resources :menu_sections do
+    resources :items
+  end
 end

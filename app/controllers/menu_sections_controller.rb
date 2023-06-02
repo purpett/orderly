@@ -15,7 +15,7 @@ class MenuSectionsController < ApplicationController
     if @menu_section.save
       redirect_to menu_sections_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -26,7 +26,7 @@ class MenuSectionsController < ApplicationController
     if @menu_section.update(menu_section_params)
       redirect_to menu_sections_path
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

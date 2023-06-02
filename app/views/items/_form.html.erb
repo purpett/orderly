@@ -1,23 +1,23 @@
-<%= form_with model: [@menu_section, item] do |f| %>
+<%= form_with model: [@menu_section, item], html: { class: 'space-y-8' } do |f| %>
   <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-input", required: true %>
   </div>
 
   <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.label :description, class: "form-label" %>
+    <%= f.text_area :description, class: "form-input" %>
   </div>
 
   <div>
-    <%= f.label :price %>
-    <%= f.number_field :price %>
+    <%= f.label :price, class: "form-label" %>
+    <%= f.number_field :price, class: "form-input", step: 0.01, required: true, min: 0 %>
   </div>
 
   <div>
-    <%= f.label :menu_section_id %>
-    <%= f.select :menu_section_id, current_restaurant.menu_sections.map { |section| [section.name, section.id] } %>
+    <%= f.label :menu_section_id, class: "form-label" %>
+    <%= f.select :menu_section_id, current_restaurant.menu_sections.map { |section| [section.name, section.id] }, {}, class: "form-select" %>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit class: 'primary-button' %>
 <% end %>

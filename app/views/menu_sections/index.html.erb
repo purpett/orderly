@@ -1,38 +1,58 @@
-<div class="flex justify-center space-x-3">
-  <%= link_to 'Add a new menu section', new_menu_section_path, class: 'primary-button mb-10' %>
-  <% if current_restaurant.menu_sections.any? %>
-    <%= link_to 'Add a new item', new_menu_section_item_path(current_restaurant.menu_sections.first), class: 'primary-button mb-10' %>
-  <% else %>
-    <%= link_to 'Add a new item', '#', class: 'primary-button button-disabled mb-10', disabled: true %>
-  <% end %>
-</div>
+<div class="max-w-5xl mx-auto">
+  <div class="flex justify-center space-x-3">
+    <%= link_to 'Add a new menu section', new_menu_section_path, class: 'primary-button mb-10' %>
+    <% if current_restaurant.menu_sections.any? %>
+      <%= link_to 'Add a new item', new_menu_section_item_path(current_restaurant.menu_sections.first), class: 'primary-button mb-10' %>
+    <% else %>
+      <%= link_to 'Add a new item', '#', class: 'primary-button button-disabled mb-10', disabled: true %>
+    <% end %>
+  </div>
 
-<div class="flex space-x-4 justify-center whitespace-nowrap max-w-100 overflow-y-scroll mb-10">
+  <div class="flex space-x-4 justify-center whitespace-nowrap max-w-100 overflow-y-scroll mb-10">
+    <% @menu_sections.each do |menu_section| %>
+      <%= link_to menu_section.name, "#menu-section-#{menu_section.id}", class: 'nav-link' %>
+    <% end %>
+  </div>
+
   <% @menu_sections.each do |menu_section| %>
-    <%= link_to menu_section.name, "#menu-section-#{menu_section.id}", class: 'nav-link' %>
-  <% end %>
-</div>
+    <div id="menu-section-<%= menu_section.id %>">
+      <div class="flex items-center space-x-3 my-8">
+        <div class="font-semibold text-xl mr-auto"><%= menu_section.name %></div>
+        <%= link_to 'Edit', edit_menu_section_path(menu_section), class: 'outline-button button-small ml-auto' %>
+      </div>
 
-<% @menu_sections.each do |menu_section| %>
-  <div id="menu-section-<%= menu_section.id %>">
-    <div class="flex items-center space-x-3 mb-8">
-      <div class="font-semibold"><%= menu_section.name %></div>
-      <%= link_to 'Edit', edit_menu_section_path(menu_section), class: 'outline-button' %>
-      <% if menu_section.items.empty? %>
-        <%= button_to 'Delete', menu_section_path(menu_section), method: :delete, class: 'danger-button' %>
+      <% if menu_section.items.any? %>
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead>
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">Name</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Description</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <% menu_section.items.each do |item| %>
+              <tr class="even:bg-gray-50">
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"><%= item.name %></td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= item.description %></td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  <%= number_to_currency item.price, unit: "£" %>
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 flex space-x-3">
+                  <%= link_to 'Edit', edit_menu_section_item_path(menu_section, item), class: 'text-indigo-600' %>
+                  <%= button_to 'Delete', menu_section_item_path(menu_section, item), method: :delete, form_class: 'inline text-red-700' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>
+          This section is empty.
+          <%= link_to 'Add an item', new_menu_section_item_path(menu_section), class: 'link' %>
+        </p>
       <% end %>
     </div>
-
-    <ul>
-      <% menu_section.items.each do |item| %>
-        <li>
-          <%= item.name %> | <%= item.description %> | <%= item.price %>
-          <%= button_to 'Kill bill', menu_section_item_path(menu_section, item), method: :delete %>
-          <%= link_to 'Edit', edit_menu_section_item_path(menu_section, item) %>
-        </li>
-      <% end %>
-
-      <%= link_to 'new item', new_menu_section_item_path(menu_section) %>
-    </ul>
-  </div>
-<% end %>
+  <% end %>
+</div>

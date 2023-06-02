@@ -2,4 +2,14 @@
   <h1 class="mt-10 mb-10 text-2xl font-semibold leading-7 text-gray-900">Edit menu section <%= @menu_section.name %></h1>
 
   <%= render 'form', menu_section: @menu_section %>
+
+  <hr class="my-10">
+
+  <% if @menu_section.items.empty? %>
+    <%= button_to 'Delete this section', menu_section_path(@menu_section), method: :delete, class: 'danger-button' %>
+  <% else %>
+    <p class="text-gray-600 text-sm">
+      This menu section is not empty. If you want to delete it, you must first delete all the items in it.
+    </p>
+  <% end %>
 </div>

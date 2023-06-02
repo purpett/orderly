@@ -1,8 +1,27 @@
+<div class="flex justify-center space-x-3">
+  <%= link_to 'Add a new menu section', new_menu_section_path, class: 'primary-button mb-10' %>
+  <% if current_restaurant.menu_sections.any? %>
+    <%= link_to 'Add a new item', new_menu_section_item_path(current_restaurant.menu_sections.first), class: 'primary-button mb-10' %>
+  <% else %>
+    <%= link_to 'Add a new item', '#', class: 'primary-button button-disabled mb-10', disabled: true %>
+  <% end %>
+</div>
+
+<div class="flex space-x-4 justify-center whitespace-nowrap max-w-100 overflow-y-scroll mb-10">
+  <% @menu_sections.each do |menu_section| %>
+    <%= link_to menu_section.name, "#menu-section-#{menu_section.id}", class: 'nav-link' %>
+  <% end %>
+</div>
+
 <% @menu_sections.each do |menu_section| %>
-  <div>
-    <h3><%= menu_section.name %></h3>
-    <%= link_to 'Edit', edit_menu_section_path(menu_section) %>
-    <%= button_to 'Kill', menu_section_path(menu_section), method: :delete %>
+  <div id="menu-section-<%= menu_section.id %>">
+    <div class="flex items-center space-x-3 mb-8">
+      <div class="font-semibold"><%= menu_section.name %></div>
+      <%= link_to 'Edit', edit_menu_section_path(menu_section), class: 'outline-button' %>
+      <% if menu_section.items.empty? %>
+        <%= button_to 'Delete', menu_section_path(menu_section), method: :delete, class: 'danger-button' %>
+      <% end %>
+    </div>
 
     <ul>
       <% menu_section.items.each do |item| %>
@@ -12,8 +31,8 @@
           <%= link_to 'Edit', edit_menu_section_item_path(menu_section, item) %>
         </li>
       <% end %>
+
+      <%= link_to 'new item', new_menu_section_item_path(menu_section) %>
     </ul>
   </div>
 <% end %>
-
-<%= link_to 'New', new_menu_section_path, class: 'primary-button' %>

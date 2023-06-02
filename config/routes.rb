@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "pages#index"
+  devise_scope :restaurant do
+    root to: "devise/sessions#new"
+  end
 
   resources :menu_sections do
     resources :items

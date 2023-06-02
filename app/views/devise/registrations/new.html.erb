@@ -34,7 +34,7 @@
                 <%= f.password_field :password, autocomplete: "new-password", required: true, class: 'form-input' %>
               </div>
               <% if @minimum_password_length %>
-                <em class="mt-2 text-sm text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
+                <p class="mt-2 text-sm text-gray-500">(<%= @minimum_password_length %> characters minimum)</p>
               <% end %><br />
             </div>
 

@@ -1,7 +1,33 @@
-<%= @restaurant.name %>
-<%= @restaurant.email %>
-<%= @restaurant.location%>
-<%= link_to 'Edit', edit_restaurant_registration_path %>
+<div class="max-w-5xl mx-auto flex">
+  <div class="flex-grow">
+    <h1 class="mt-10 mb-10 text-2xl font-semibold leading-7 text-gray-900">Your profile</h1>
+    <div class="space-y-6">
+      <div>
+        <div class="font-semibold">Restaurant name</div>
+        <%= @restaurant.name %>
+      </div>
+      <div>
+        <div class="font-semibold">Email</div>
+        <%= @restaurant.email %>
+      </div>
+      <div>
+        <div class="font-semibold">Location</div>
+        <% if @restaurant.location.present? %>
+          <%= @restaurant.location %>
+        <% else %>
+          <span class="text-gray-500">Not set</span>
+        <% end %>
+      </div>
+    </div>
+    <%= link_to 'Edit', edit_restaurant_registration_path, class: 'primary-button mt-10' %>
+  </div>
 
-<% # https://github.com/whomwah/rqrcode %>
-<%== RQRCode::QRCode.new(order_at_url(current_restaurant.slug)).as_svg %>
+  <div class="flex-grow text-center">
+    <h2 class="mt-10 mb-10 text-2xl font-semibold leading-7 text-gray-900">Ordering QR code</h2>
+    <% # https://github.com/whomwah/rqrcode %>
+    <div id="qrcode-container" class="mx-auto max-w-sm">
+      <%== RQRCode::QRCode.new(order_at_url(current_restaurant.slug)).as_svg(viewbox: true) %>
+    </div>
+    <p class="text-gray-500 font-small mt-3">Share this with your customers to receive orders online.</p>
+  </div>
+</div>

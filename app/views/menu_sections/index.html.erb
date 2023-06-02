@@ -1,8 +1,7 @@
-<%= button_to 'Logout', destroy_restaurant_session_path, method: :delete %>
-
 <% @menu_sections.each do |menu_section| %>
   <div>
     <h3><%= menu_section.name %></h3>
+    <%= link_to 'Edit', edit_menu_section_path(menu_section) %>
     <%= button_to 'Kill', menu_section_path(menu_section), method: :delete %>
 
     <ul>
@@ -17,4 +16,4 @@
   </div>
 <% end %>
 
-<%= link_to 'New', new_menu_section_path %>
+<%= link_to 'New', new_menu_section_path, class: 'primary-button' %>

@@ -12,11 +12,12 @@ Rails.application.routes.draw do
   resources :orders, only: %i[index show]
 
   get "/restaurants", to: "restaurants#show"
-  get "/order-at/:slug", as: :order_at, to: "pages#index" # TODO
+  get "/order-at/:slug", as: :order_at, to: "orders#new"
 
   # For apis
 
   namespace :api do
-    resources :restaurants, :orders
+    resources :restaurants, only: :show
+    resources :orders, only: :create
   end
 end

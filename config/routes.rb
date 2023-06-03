@@ -13,4 +13,10 @@ Rails.application.routes.draw do
 
   get "/restaurants", to: "restaurants#show"
   get "/order-at/:slug", as: :order_at, to: "pages#index" # TODO
+
+  # For apis
+
+  namespace :api do
+    resources :restaurants, :orders
+  end
 end

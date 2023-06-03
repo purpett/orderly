@@ -1,5 +1,5 @@
 <div class="max-w-5xl mx-auto">
-  <div class="flex justify-center space-x-3">
+  <div class="flex justify-center space-x-3 mt-6">
     <%= link_to 'Add a new menu section', new_menu_section_path, class: 'primary-button mb-10' %>
     <% if current_restaurant.menu_sections.any? %>
       <%= link_to 'Add a new item', new_menu_section_item_path(current_restaurant.menu_sections.first), class: 'primary-button mb-10' %>
@@ -8,7 +8,7 @@
     <% end %>
   </div>
 
-  <div class="flex space-x-4 justify-center whitespace-nowrap max-w-100 overflow-y-scroll mb-10">
+  <div class="flex space-x-4 justify-center whitespace-nowrap max-w-100 overflow-y-scroll mb-10 mt-10">
     <% @menu_sections.each do |menu_section| %>
       <%= link_to menu_section.name, "#menu-section-#{menu_section.id}", class: 'nav-link' %>
     <% end %>

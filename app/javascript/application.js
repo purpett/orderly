@@ -5,8 +5,13 @@ import "./controllers"
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-// const root = createRoot(document.getElementById("root"))
-// root.render(<div>Hello</div>)
+import ReactAppRoot from "./components/ReactAppRoot";
+
+const rootElement = document.getElementById("react-app")
+if (rootElement) {
+  const root = createRoot(rootElement)
+  root.render(<ReactAppRoot />)
+}
 
 document.addEventListener("turbo:load", () => {
   const hamburger = document.querySelector("#mobile-nav-hamburger");

@@ -4,7 +4,7 @@ import MenuNavbar from "./MenuNavbar"
 import { getRestaurant } from "../api/getRestaurant"
 import MenuItems from "./MenuItems"
 
-export default function Menu() {
+export default function Menu(props) {
   const [restaurantInfo, setRestaurantInfo] = useState({ menu: [] })
   const params = useParams()
 
@@ -16,7 +16,10 @@ export default function Menu() {
     <div>
       <h1>{restaurantInfo.name}</h1>
       <MenuNavbar restaurantInfo={restaurantInfo} />
-      <MenuItems restaurantInfo={restaurantInfo} />
+      <MenuItems
+        restaurantInfo={restaurantInfo}
+        addItemToOrder={props.addItemToOrder}
+      />
     </div>
   )
 }

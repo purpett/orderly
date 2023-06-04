@@ -10,7 +10,7 @@ export default function MenuNavbar(props) {
       {restaurantInfo.menu.map((section, index) => {
         return (
           <li key={index}>
-            <a href={`/order-at/${params.slug}/menu/${section.id}`}>{section.name}</a>
+            <a href={`#section-${section.id}`}>{section.name}</a>
           </li>
         )
       })}

@@ -28,7 +28,15 @@ export default function App() {
       <Routes>
         <Route path="order-at/:slug" element={<CustomerDetails customerInfo={customerInfo} setCustomerInfo={setCustomerInfo} />} />
         <Route path="order-at/:slug/menu" element={<Menu order={order} addItemToOrder={addItemToOrder} />} />
-        <Route path="order-at/:slug/cart" element={<Order order={order} removeItemFromOrder={removeItemFromOrder} clearOrder={clearOrder} />} />
+        <Route
+          path="order-at/:slug/cart"
+          element={
+            <Order
+              order={order}
+              customerInfo={customerInfo}
+              removeItemFromOrder={removeItemFromOrder}
+              clearOrder={clearOrder} />
+          } />
       </Routes>
     </div>
   )

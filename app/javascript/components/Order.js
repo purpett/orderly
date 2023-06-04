@@ -1,9 +1,11 @@
+import { createOrder } from "../api/createOrder"
 import formatCurrency from "../formatCurrency"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 export default function Order(props) {
-  const { order } = props
+  const { customerInfo, order } = props
   const navigate = useNavigate()
+  const params = useParams()
 
   const total = order.reduce((total, item) => {
     return total + item.price
@@ -12,6 +14,10 @@ export default function Order(props) {
   function clear() {
     props.clearOrder()
     navigate(-1)
+  }
+
+  function submitOrder() {
+    createOrder(params.slug, customerInfo, order)
   }
 
   return (
@@ -36,6 +42,7 @@ export default function Order(props) {
         <div className="ml-auto">{formatCurrency(total)}</div>
       </div>
 
+      <div className="mb-4"><div className="primary-button" onClick={submitOrder}>Checkout</div></div>
       <div className="cart-button" onClick={clear}>Empty cart</div>
     </div>
   )

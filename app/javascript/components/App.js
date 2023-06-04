@@ -26,7 +26,7 @@ export default function App() {
       <Routes>
         <Route path="order-at/:slug" element={<CustomerDetails customerInfo={customerInfo} setCustomerInfo={setCustomerInfo} />} />
         <Route path="order-at/:slug/menu" element={<Menu addItemToOrder={addItemToOrder} />} />
-        <Route path="order-at/:slug/cart" element={<Order />} />
+        <Route path="order-at/:slug/cart" element={<Order order={order} />} />
       </Routes>
     </div>
   )

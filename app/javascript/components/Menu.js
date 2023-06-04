@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import MenuNavbar from "./MenuNavbar"
 import { getRestaurant } from "../api/getRestaurant"
 import MenuItems from "./MenuItems"
@@ -20,6 +20,8 @@ export default function Menu(props) {
         restaurantInfo={restaurantInfo}
         addItemToOrder={props.addItemToOrder}
       />
+
+      <Link to={`/order-at/${params.slug}/cart`}>Cart</Link>
     </div>
   )
 }

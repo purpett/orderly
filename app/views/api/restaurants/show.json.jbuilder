@@ -6,8 +6,10 @@ json.location @restaurant.location
 
 json.menu @restaurant.menu_sections do |menu_section|
   json.name menu_section.name
+  json.id menu_section.id
   json.items menu_section.items do |item|
     json.name item.name
+    json.id item.id
     json.description item.description
     json.price item.price
   end

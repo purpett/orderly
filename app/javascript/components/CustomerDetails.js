@@ -5,7 +5,7 @@ import { getRestaurant } from '../api/getRestaurant'
 export default function CustomerDetails(props) {
 
   const { customerInfo, setCustomerInfo } = props
-  const [restaurantInfo, setRestaurantInfo] = useState({})
+  const [restaurantInfo, setRestaurantInfo] = useState({ menu: [] })
 
   const navigate = useNavigate()
   const params = useParams()
@@ -19,6 +19,7 @@ export default function CustomerDetails(props) {
     navigate(`/order-at/${params.slug}/menu`)
   }
 
+  // Here because cannot use useParams in useEffect outside of Router in App. Temporary solution.
   // gets the restaurant information from the API, stores into data variable, and sets the restaurantInfo state to the data variable
   useEffect(() => {
     getRestaurant(params.slug).then(data => setRestaurantInfo(data))

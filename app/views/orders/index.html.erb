@@ -1,5 +1,22 @@
 <h1>All orders</h1>
 
-<% @orders.each do |order| %>
-  <%= link_to "Order #{order.id}", order_path(order) %>
-<% end %>
+<table class="min-w-full divide-y divide-gray-300">
+  <thead>
+    <tr>
+      <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">#</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Customer</th>
+      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Total</th>
+    </tr>
+  </thead>
+  <tbody class="bg-white">
+    <% @orders.each do |order| %>
+      <tr class="even:bg-gray-50">
+        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"><%= order.id %></td>
+        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <%= link_to order.customer_name, order_path(order) %>
+        </td>
+        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= number_to_currency order.total, unit: "£" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -63,7 +63,7 @@ export default function CustomerDetails(props) {
             required
           />
         </div>
-        <button onClick={handleOnSubmit}>Proceed to menu</button>
+        <button type="submit" onClick={handleOnSubmit}>Proceed to menu</button>
       </form>
 
     </div>

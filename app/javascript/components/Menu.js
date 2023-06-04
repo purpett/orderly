@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import MenuNavbar from "./MenuNavbar"
 import { getRestaurant } from "../api/getRestaurant"
+import MenuItems from "./MenuItems"
 
 export default function Menu() {
   const [restaurantInfo, setRestaurantInfo] = useState({ menu: [] })
@@ -15,6 +16,7 @@ export default function Menu() {
     <div>
       <h1>{restaurantInfo.name}</h1>
       <MenuNavbar restaurantInfo={restaurantInfo} />
+      <MenuItems restaurantInfo={restaurantInfo} />
     </div>
   )
 }

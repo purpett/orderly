@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { getRestaurant } from '../api/getRestaurant'
 
 export default function CustomerDetails(props) {
 
   const { customerInfo, setCustomerInfo } = props
+  const [restaurantInfo, setRestaurantInfo] = useState({})
 
   const navigate = useNavigate()
   const params = useParams()
@@ -17,10 +19,16 @@ export default function CustomerDetails(props) {
     navigate(`/order-at/${params.slug}/menu`)
   }
 
+  // gets the restaurant information from the API, stores into data variable, and sets the restaurantInfo state to the data variable
+  useEffect(() => {
+    getRestaurant(params.slug).then(data => setRestaurantInfo(data))
+  }, [])
+
+
   return (
     <div>
       <h1>WELCOME TO</h1>
-      <h2>restaurant_name</h2>
+      <h2>{restaurantInfo.name}</h2>
 
       <form onSubmit={handleOnSubmit}>
         <div>

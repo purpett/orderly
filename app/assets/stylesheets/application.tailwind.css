@@ -43,6 +43,10 @@ html {
   @apply py-1 px-2 text-sm;
 }
 
+.cart-button {
+  @apply inline-flex justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ;
+}
+
 .link {
   @apply font-semibold text-indigo-600 hover:text-indigo-500;
 }

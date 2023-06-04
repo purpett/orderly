@@ -13,7 +13,9 @@ export default function App() {
   }
 
   function removeItemFromOrder(item) {
-    const newOrder = order.filter(orderItem => orderItem !== item)
+    const index = order.findIndex(orderItem => orderItem.id === item.id)
+    const newOrder = [...order]
+    newOrder.splice(index, 1)
     setOrder(newOrder)
   }
 
@@ -22,11 +24,11 @@ export default function App() {
   }
 
   return (
-    <div>
+    <div className="max-w-sm mx-auto py-8 px-3">
       <Routes>
         <Route path="order-at/:slug" element={<CustomerDetails customerInfo={customerInfo} setCustomerInfo={setCustomerInfo} />} />
-        <Route path="order-at/:slug/menu" element={<Menu addItemToOrder={addItemToOrder} />} />
-        <Route path="order-at/:slug/cart" element={<Order order={order} />} />
+        <Route path="order-at/:slug/menu" element={<Menu order={order} addItemToOrder={addItemToOrder} />} />
+        <Route path="order-at/:slug/cart" element={<Order order={order} removeItemFromOrder={removeItemFromOrder} clearOrder={clearOrder} />} />
       </Routes>
     </div>
   )

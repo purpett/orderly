@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import MenuNavbar from "./MenuNavbar"
 import { getRestaurant } from "../api/getRestaurant"
 import MenuItems from "./MenuItems"
+import formatCurrency from "../formatCurrency"
 
 export default function Menu(props) {
   const [restaurantInfo, setRestaurantInfo] = useState({ menu: [] })
@@ -12,16 +13,22 @@ export default function Menu(props) {
     getRestaurant(params.slug).then(data => setRestaurantInfo(data))
   }, [])
 
+  function orderTotal() {
+    return props.order.reduce((total, item) => total + item.price, 0)
+  }
+
   return (
     <div>
-      <h1>{restaurantInfo.name}</h1>
+      <h1 className="text-3xl font-semibold mb-10 text-center">{restaurantInfo.name}</h1>
+      <div className="flex justify-end mb-10">
+        <Link to={`/order-at/${params.slug}/cart`} className="cart-button">Cart {formatCurrency(orderTotal())}</Link>
+      </div>
       <MenuNavbar restaurantInfo={restaurantInfo} />
       <MenuItems
         restaurantInfo={restaurantInfo}
         addItemToOrder={props.addItemToOrder}
+        order={props.order}
       />
-
-      <Link to={`/order-at/${params.slug}/cart`}>Cart</Link>
     </div>
   )
 }

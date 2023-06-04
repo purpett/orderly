@@ -1,8 +1,40 @@
-<h1>Order <%= @order.id %></h1>
+<h1 class="mt-10 mb-3 text-2xl font-semibold leading-7 text-gray-900 text-center">Order <%= @order.id %></h1>
+<div class="text-sm text-gray-500 text-center mb-10">
+  Placed at <%= @order.created_at.strftime("%H:%M on %d %B %Y") %>
+</div>
 
-<%= @order.customer_name %>
+<div class="max-w-lg mx-auto">
+  <div>
+    <span class="font-semibold">Name:</span>
+    <%= @order.customer_name %>
+  </div>
 
-<% @order.items do |item| %>
-  <%= item.name %>
-  <%= item.price %>
-<% end %>
+  <div>
+    <span class="font-semibold">Email:</span>
+    <%= @order.customer_email %>
+  </div>
+
+  <div>
+    <span class="font-semibold">Phone:</span>
+    <%= @order.customer_phone %>
+  </div>
+
+  <ul>
+    <% @order.items.each do |item| %>
+      <li class="flex border-b py-3">
+        <div><%= item.name %>
+        </div>
+        <div class="ml-auto">
+          <%= number_to_currency item.price, unit: "£" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="flex border-t py-3">
+    <div class="font-semibold">Total:</div>
+    <div class="ml-auto">
+      <%= number_to_currency @order.total, unit: "£" %>
+    </div>
+  </div>
+</div>

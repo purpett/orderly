@@ -16,8 +16,11 @@ export default function Order(props) {
     navigate(-1)
   }
 
-  function submitOrder() {
-    createOrder(params.slug, customerInfo, order)
+  async function submitOrder() {
+    const createdOrder = await createOrder(params.slug, customerInfo, order)
+    const orderId = createdOrder.id
+
+    navigate(`/order-at/${params.slug}/receipts/${orderId}`)
   }
 
   return (

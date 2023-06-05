@@ -3,6 +3,7 @@
 json.name @restaurant.name
 json.email @restaurant.email
 json.location @restaurant.location
+json.phone_number @restaurant.phone_number
 
 json.menu @restaurant.menu_sections do |menu_section|
   json.name menu_section.name

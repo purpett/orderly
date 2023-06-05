@@ -62,7 +62,7 @@ export default function App() {
   }
 
   return (
-    <div className="max-w-sm mx-auto py-8 px-3">
+    <div className="max-w-lg mx-auto py-8 px-3">
       <Routes>
         <Route path="order-at/:slug" element={<CustomerDetails customerInfo={customerInfo} setCustomerInfo={setCustomerInfo} />} />
         <Route path="order-at/:slug/menu" element={<Menu order={order} addItemToOrder={addItemToOrder} orderTotal={orderTotal} />} />

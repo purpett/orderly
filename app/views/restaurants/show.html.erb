@@ -11,6 +11,14 @@
         <%= @restaurant.email %>
       </div>
       <div>
+        <div class="font-semibold">Phone number</div>
+        <% if @restaurant.phone_number.present? %>
+          <%= @restaurant.phone_number %>
+        <% else %>
+          <span class="text-gray-500">Not set</span>
+        <% end %>
+      </div>
+      <div>
         <div class="font-semibold">Location</div>
         <% if @restaurant.location.present? %>
           <%= @restaurant.location %>

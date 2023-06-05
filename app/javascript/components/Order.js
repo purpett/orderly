@@ -1,6 +1,6 @@
 import { createOrder } from "../api/createOrder"
 import formatCurrency from "../formatCurrency"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 export default function Order(props) {
   const { customerInfo, order } = props
@@ -25,6 +25,10 @@ export default function Order(props) {
 
   return (
     <div>
+      <Link to={`/order-at/${params.slug}/menu`} className="mb-8 inline-block">
+        &larr;
+        Back to menu
+      </Link>
       <ul>
         {order.map((item, index) => (
           <li key={index} className="flex border-b py-3 gap-4">
@@ -45,8 +49,10 @@ export default function Order(props) {
         <div className="ml-auto">{formatCurrency(total)}</div>
       </div>
 
-      <div className="mb-4"><div className="primary-button" onClick={submitOrder}>Checkout</div></div>
-      <div className="cart-button" onClick={clear}>Empty cart</div>
+      <div className="flex justify-between">
+        <div className="cart-button" onClick={clear}>Empty cart</div>
+        <div><div className="primary-button" onClick={submitOrder}>Checkout</div></div>
+      </div>
     </div>
   )
 }

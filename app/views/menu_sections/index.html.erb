@@ -8,7 +8,7 @@
     <% end %>
   </div>
 
-  <div class="flex space-x-4 justify-center whitespace-nowrap max-w-100 overflow-y-scroll mb-10 mt-10">
+  <div class="flex space-x-4 whitespace-nowrap max-w-100 overflow-y-scroll mb-10 mt-10">
     <% @menu_sections.each do |menu_section| %>
       <%= link_to menu_section.name, "#menu-section-#{menu_section.id}", class: 'menu-tab-button' %>
     <% end %>

@@ -21,7 +21,9 @@ export default function Menu(props) {
     <div>
       <h1 className="text-3xl font-semibold mb-10 text-center">{restaurantInfo.name}</h1>
       <div className="flex justify-end mb-10">
-        <Link to={`/order-at/${params.slug}/cart`} className="cart-button">Cart {formatCurrency(orderTotal())}</Link>
+        <Link to={`/order-at/${params.slug}/cart`} className="cart-button">
+          <img src="/cart-variant.svg" alt="cart icon" class="mr-2" />
+          {formatCurrency(orderTotal())}</Link>
       </div>
       <MenuNavbar restaurantInfo={restaurantInfo} />
       <MenuItems

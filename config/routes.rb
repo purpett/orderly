@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :items
   end
 
-  resources :orders, only: %i[index show]
+  resources :orders, only: %i[index show update]
 
   get "/restaurants", to: "restaurants#show"
   get "/order-at/:slug", as: :order_at, to: "orders#new"

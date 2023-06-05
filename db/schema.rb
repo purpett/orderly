@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_172714) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_155620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_172714) do
     t.string "customer_name"
     t.string "customer_email"
     t.string "customer_phone"
+    t.boolean "completed", default: false
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
   end
 

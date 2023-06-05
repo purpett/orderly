@@ -27,4 +27,12 @@ document.addEventListener("turbo:load", () => {
       mobileNav.classList.add("hidden");
     })
   }
+
+  const orderCompleteCheckbox = document.querySelector("#order-complete-checkbox");
+  if (orderCompleteCheckbox) {
+    orderCompleteCheckbox.addEventListener("change", (e) => {
+      const form = e.target.closest("form");
+      form.submit();
+    })
+  }
 })

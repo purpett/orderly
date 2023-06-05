@@ -32,9 +32,14 @@
   </ul>
 
   <div class="flex border-t py-3">
-    <div class="font-semibold">Total:</div>
-    <div class="ml-auto">
+    <div class="font-bold">Total:</div>
+    <div class="ml-auto font-bold">
       <%= number_to_currency @order.total, unit: "£" %>
     </div>
   </div>
+
+  <%= form_with model: @order do |f| %>
+    <%= f.label :completed, @order.completed ? "Mark as incomplete" : "Mark as completed", for: 'order-complete-checkbox' %>
+    <%= f.check_box :completed, id: "order-complete-checkbox" %>
+  <% end %>
 </div>

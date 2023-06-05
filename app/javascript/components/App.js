@@ -57,11 +57,15 @@ export default function App() {
     setOrder([])
   }
 
+  function orderTotal(order) {
+    return order.items.reduce((total, item) => total + item.price, 0)
+  }
+
   return (
     <div className="max-w-sm mx-auto py-8 px-3">
       <Routes>
         <Route path="order-at/:slug" element={<CustomerDetails customerInfo={customerInfo} setCustomerInfo={setCustomerInfo} />} />
-        <Route path="order-at/:slug/menu" element={<Menu order={order} addItemToOrder={addItemToOrder} />} />
+        <Route path="order-at/:slug/menu" element={<Menu order={order} addItemToOrder={addItemToOrder} orderTotal={orderTotal} />} />
         <Route
           path="order-at/:slug/cart"
           element={
@@ -69,15 +73,18 @@ export default function App() {
               order={order}
               customerInfo={customerInfo}
               removeItemFromOrder={removeItemFromOrder}
-              clearOrder={clearOrder} />
-          } />
+              clearOrder={clearOrder}
+              orderTotal={orderTotal} />}
+        />
         <Route
           path="order-at/:slug/receipts/:orderId"
           element={
             <Receipt
               order={order}
               customerInfo={customerInfo}
-            />} />
+              orderTotal={orderTotal}
+            />}
+        />
       </Routes>
     </div>
   )

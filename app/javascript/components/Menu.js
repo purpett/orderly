@@ -13,17 +13,13 @@ export default function Menu(props) {
     getRestaurant(params.slug).then(data => setRestaurantInfo(data))
   }, [])
 
-  function orderTotal() {
-    return props.order.reduce((total, item) => total + item.price, 0)
-  }
-
   return (
     <div>
       <h1 className="text-3xl font-semibold mb-10 text-center">{restaurantInfo.name}</h1>
       <div className="flex justify-end mb-10">
         <Link to={`/order-at/${params.slug}/cart`} className="cart-button">
           <img src="/cart-variant.svg" alt="cart icon" className="mr-2" />
-          {formatCurrency(orderTotal())}</Link>
+          {formatCurrency(props.orderTotal(props.order))}</Link>
       </div>
       <MenuNavbar restaurantInfo={restaurantInfo} />
       <MenuItems

@@ -2,6 +2,11 @@ module Api
   class OrdersController < ApplicationController
     skip_before_action :verify_authenticity_token
 
+    def show
+      @restaurant = Restaurant.friendly.find(params[:restaurant_id])
+      @order = @restaurant.orders.find(params[:id])
+    end
+
     def create
       @restaurant = Restaurant.friendly.find(params[:slug])
       @order = @restaurant.orders.new(order_params)

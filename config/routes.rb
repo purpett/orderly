@@ -15,11 +15,14 @@ Rails.application.routes.draw do
   get "/order-at/:slug", as: :order_at, to: "orders#new"
   get "/order-at/:slug/menu", to: "orders#new"
   get "/order-at/:slug/cart", to: "orders#new"
+  get "/order-at/:slug/receipts/:orderId", to: "orders#new"
 
   # For apis
 
-  namespace :api do
-    resources :restaurants, only: :show
+  namespace :api, defaults: { format: :json } do
+    resources :restaurants, only: :show do
+      resources :orders, only: :show
+    end
     resources :orders, only: :create
   end
 end

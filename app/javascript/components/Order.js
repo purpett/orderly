@@ -13,6 +13,7 @@ export default function Order(props) {
 
   function clear() {
     props.clearOrder()
+
     navigate(-1)
   }
 
@@ -20,6 +21,7 @@ export default function Order(props) {
     const createdOrder = await createOrder(params.slug, customerInfo, order)
     const orderId = createdOrder.id
 
+    localStorage.clear()
     navigate(`/order-at/${params.slug}/receipts/${orderId}`)
   }
 

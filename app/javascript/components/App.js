@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import CustomerDetails from "./CustomerDetails"
 import Menu from "./Menu"
 import Order from "./Order"
+import Receipt from "./Receipt"
 
 function loadCustomerInfo() {
   const customerInfo = JSON.parse(localStorage.getItem("customerInfo"))
@@ -52,6 +53,7 @@ export default function App() {
   }
 
   function clearOrder() {
+    localStorage.removeItem("order")
     setOrder([])
   }
 
@@ -69,6 +71,13 @@ export default function App() {
               removeItemFromOrder={removeItemFromOrder}
               clearOrder={clearOrder} />
           } />
+        <Route
+          path="order-at/:slug/receipts/:orderId"
+          element={
+            <Receipt
+              order={order}
+              customerInfo={customerInfo}
+            />} />
       </Routes>
     </div>
   )

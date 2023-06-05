@@ -27,10 +27,10 @@ export default function Order(props) {
     <div>
       <ul>
         {order.map((item, index) => (
-          <li key={index} className="flex border-b py-3">
-            <div>
+          <li key={index} className="flex border-b py-3 gap-4">
+            <div className="flex-1">
               <h3>{item.name}</h3>
-              <p class="text-sm text-gray-500">{item.description}</p>
+              <p className="text-sm text-gray-500 break-words">{item.description}</p>
             </div>
             <div className="ml-auto">
               {formatCurrency(item.price)}

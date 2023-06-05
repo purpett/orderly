@@ -7,7 +7,7 @@ export default function MenuNavbar(props) {
     <ul className="flex whitespace-nowrap overflow-x-auto space-x-5 text-sm font-semibold mb-8">
       {restaurantInfo.menu.map((section, index) => {
         return (
-          <li key={index} className="bg-gray-100 px-2 py-1 rounded-lg">
+          <li key={index} className="menu-tab-button">
             <a href={`#section-${section.id}`}>{section.name}</a>
           </li>
         )

@@ -21,7 +21,7 @@
 
   <div>
     <%= f.label :menu_section_id, class: "form-label" %>
-    <%= f.select :menu_section_id, current_restaurant.menu_sections.map { |section| [section.name, section.id] }, {}, class: "form-select" %>
+    <%= f.select :menu_section_id, options_for_select(current_restaurant.menu_sections.map { |section| [section.name, section.id] }, @item.menu_section_id), {}, class: "form-select" %>
   </div>
 
   <%= f.submit class: 'primary-button' %>

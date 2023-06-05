@@ -24,7 +24,7 @@ export default function MenuItems(props) {
           <h2 className="text-xl font-semibold text-center">{section.name}</h2>
           <ul>
             {section.items.map((item, index) => (
-              <li key={index} onClick={() => add(item)} className={`flex py-5 border-b cursor-pointer`}>
+              <li key={index} onClick={() => add(item)} className={`flex py-5 border-b cursor-pointer gap-6`}>
                 <div className={`${isItemInOrder(item) ? "border-l border-l-2 pl-2" : ""}`}>
                   <h3 className="font-semibold">{countItemInOrder(item)} {item.name}</h3>
                   <p className="text-gray-500">{item.description}</p>

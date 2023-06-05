@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = current_restaurant.items.build
+    @item = @menu_section.items.build
   end
 
   def create

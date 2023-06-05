@@ -24,5 +24,6 @@ Rails.application.routes.draw do
       resources :orders, only: :show
     end
     resources :orders, only: :create
+    resources :payments, only: :create
   end
 end

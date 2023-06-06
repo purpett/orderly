@@ -11,17 +11,19 @@
   </head>
 
   <body>
-    <%= render 'header' %>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
     <% if current_restaurant %>
+      <% if !(controller_name == 'orders' && action_name == 'new') %>
+        <%= render 'header' %>
+      <% end%>
       <div class="mx-auto max-w-7xl px-3">
         <%= yield %>
       </div>
     <% else %>
       <%= yield %>
     <% end %>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
   </body>
 </html>

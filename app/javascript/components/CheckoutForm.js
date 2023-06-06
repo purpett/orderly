@@ -83,7 +83,7 @@ export default function CheckoutForm(props) {
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
+        <span id="button-text" className={isLoading ? "" : "primary-button mt-3"}>
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
       </button>

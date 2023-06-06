@@ -1,30 +1,36 @@
-<h1 class="mt-10 mb-10 text-2xl font-semibold leading-7 text-gray-900">Orders</h1>
+<h1 class="mt-10 mb-10 text-3xl font-bold leading-7 text-gray-900">Orders</h1>
 
-<table class="min-w-full divide-y divide-gray-300">
+<h2 class="font-semibold mb-6 text-2xl">Open Orders</h2>
+<table class="table-fixed min-w-full divide-y divide-gray-300">
   <thead>
     <tr>
-      <th scope="col" class="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
-      <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
-      <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
-      <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
+      <th scope="col" class="w-1/5 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
+      <th scope="col" class="w-2/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
+      <th scope="col" class="w-1/5px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
+      <th scope="col" class="w-1/5px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
     </tr>
   </thead>
   <tbody class="bg-white">
-    <% @orders.each do |order| %>
-      <tr class="even:bg-gray-50">
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-center font-medium text-gray-900 sm:pl-3"><%= link_to order.id, order_path(order) %></td>
-        <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-500">
-          <%= link_to order.customer_name, order_path(order) %>
-        </td>
-        <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-500">
-          <%= link_to order_path(order) do %>
-            <%= number_to_currency order.total, unit: "£" %>
-          <% end %>
-        </td>
-        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-center font-medium text-gray-900 sm:pl-3">
-          <%== order.completed? ? '✔️' : "❌" %>
-        </td>
-      </tr>
+    <% @orders.where(completed: false).order(created_at: :desc).each do |order| %>
+      <%= render 'order_row', order: order %>
+    <% end %>
+  </tbody>
+</table>
+
+<h2 class="font-semibold my-6 text-2xl">Past Orders</h2>
+
+<table class="table-fixed min-w-full divide-y divide-gray-300">
+  <thead>
+    <tr>
+      <th scope="col" class="w-1/5 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
+      <th scope="col" class="w-2/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
+      <th scope="col" class="w-1/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
+      <th scope="col" class="w-1/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
+    </tr>
+  </thead>
+  <tbody class="bg-white">
+    <% @orders.where(completed: true).order(created_at: :desc).each do |order| %>
+      <%= render 'order_row', order: order %>
     <% end %>
   </tbody>
 </table>

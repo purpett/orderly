@@ -7,6 +7,9 @@ module Api
       payment_intent = Stripe::PaymentIntent.create(
         amount: (params[:total] * 100).to_i,
         currency: 'gbp',
+        automatic_payment_methods: {
+          enabled: true,
+        },
       )
 
       render json: {

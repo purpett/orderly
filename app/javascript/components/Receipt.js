@@ -36,7 +36,7 @@ export default function Receipt(props) {
       <div className="flex border-t py-3">
         <div className="font-bold">Total:</div>
         <div className="ml-auto font-bold">
-          {formatCurrency(props.orderTotal(order))}
+          {formatCurrency(props.orderTotal(order.items))}
         </div>
       </div>
 

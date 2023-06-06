@@ -8,6 +8,7 @@ import formatCurrency from "../formatCurrency"
 export default function Menu(props) {
   const [restaurantInfo, setRestaurantInfo] = useState({ menu: [] })
   const params = useParams()
+  const { order, orderTotal } = props
 
   useEffect(() => {
     getRestaurant(params.slug).then(data => setRestaurantInfo(data))
@@ -19,13 +20,13 @@ export default function Menu(props) {
       <div className="flex justify-end mb-10">
         <Link to={`/order-at/${params.slug}/cart`} className="cart-button">
           <img src="/cart-variant.svg" alt="cart icon" className="mr-2" />
-          {formatCurrency(props.orderTotal(props.order))}</Link>
+          {formatCurrency(orderTotal(order))}</Link>
       </div>
       <MenuNavbar restaurantInfo={restaurantInfo} />
       <MenuItems
         restaurantInfo={restaurantInfo}
         addItemToOrder={props.addItemToOrder}
-        order={props.order}
+        order={order}
       />
     </div>
   )

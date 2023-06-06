@@ -1,15 +1,12 @@
 import { createOrder } from "../api/createOrder"
 import formatCurrency from "../formatCurrency"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import StripeForm from "./StripeForm"
 
 export default function Order(props) {
-  const { customerInfo, order } = props
+  const { customerInfo, order, orderTotal } = props
   const navigate = useNavigate()
   const params = useParams()
-
-  const total = order.reduce((total, item) => {
-    return total + item.price
-  }, 0)
 
   function clear() {
     props.clearOrder()
@@ -48,13 +45,15 @@ export default function Order(props) {
 
       <div className="flex font-semibold mt-4 mb-8">
         <div>Total</div>
-        <div className="ml-auto">{formatCurrency(total)}</div>
+        <div className="ml-auto">{formatCurrency(orderTotal(order))}</div>
       </div>
 
       <div className="flex justify-between">
         <div className="cart-button" onClick={clear}>Empty cart</div>
         <div><div className="primary-button" onClick={submitOrder}>Checkout</div></div>
       </div>
+
+      <StripeForm total={orderTotal(order)} />
     </div>
   )
 }

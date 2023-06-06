@@ -29,6 +29,7 @@ function loadOrder() {
   return []
 }
 
+
 export default function App() {
   const [customerInfo, setCustomerInfo] = useState(loadCustomerInfo())
   const [order, setOrder] = useState(loadOrder())
@@ -57,12 +58,14 @@ export default function App() {
     setOrder([])
   }
 
+  // This order argument must be the array of items
   function orderTotal(order) {
-    return order.items.reduce((total, item) => total + item.price, 0)
+    return order.reduce((total, item) => total + item.price, 0)
   }
 
   return (
     <div className="max-w-lg mx-auto py-8 px-3">
+      {console.log(order)}
       <Routes>
         <Route path="order-at/:slug" element={<CustomerDetails customerInfo={customerInfo} setCustomerInfo={setCustomerInfo} />} />
         <Route path="order-at/:slug/menu" element={<Menu order={order} addItemToOrder={addItemToOrder} orderTotal={orderTotal} />} />

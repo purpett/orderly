@@ -23,7 +23,6 @@ export default function Receipt(props) {
       <h1 className="mt-0 mb-10 text-2xl font-semibold text-gray-900 text-center">Thank you for ordering with <div className="text-3xl mt-6">{restaurantInfo.name}</div></h1>
       <h2 className="text-2xl text-black-600 text-start mb-10">Order n. {order.id} </h2>
       <div class="max-w-lg mx-auto">
-        {console.log(order)}
         <ul>
           {order.items.map((item, index) => (
             <li key={index} className="flex border-b py-3">

@@ -65,7 +65,6 @@ export default function App() {
 
   return (
     <div className="max-w-lg mx-auto py-8 px-3">
-      {console.log(order)}
       <Routes>
         <Route path="order-at/:slug" element={<CustomerDetails customerInfo={customerInfo} setCustomerInfo={setCustomerInfo} />} />
         <Route path="order-at/:slug/menu" element={<Menu order={order} addItemToOrder={addItemToOrder} orderTotal={orderTotal} />} />

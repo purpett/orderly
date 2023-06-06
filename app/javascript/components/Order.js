@@ -2,16 +2,26 @@ import { createOrder } from "../api/createOrder"
 import formatCurrency from "../formatCurrency"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import StripeForm from "./StripeForm"
+import { useState, useRef } from "react"
 
 export default function Order(props) {
+  const [showCheckout, setShowCheckout] = useState(false)
   const { customerInfo, order, orderTotal } = props
   const navigate = useNavigate()
   const params = useParams()
+  const ref = useRef(null)
 
   function clear() {
     props.clearOrder()
 
     navigate(-1)
+  }
+
+  const toggleCheckout = () => {
+    setShowCheckout(!showCheckout)
+    setTimeout(() => {
+      ref.current?.scrollIntoView({ behavior: 'smooth' })
+    }, 1000)
   }
 
   async function submitOrder() {
@@ -28,6 +38,7 @@ export default function Order(props) {
         &larr;
         Back to menu
       </Link>
+      <h1 className="text-2xl font-semibold mb-10 mt-3">Your order</h1>
       <ul>
         {order.map((item, index) => (
           <li key={index} className="flex border-b py-3 gap-4">
@@ -50,12 +61,16 @@ export default function Order(props) {
 
       <div className="flex justify-between">
         <div className="cart-button" onClick={clear}>Empty cart</div>
-        {/* <div><div className="primary-button" onClick={submitOrder}>Checkout</div></div> */}
+        <div><div className="primary-button" onClick={toggleCheckout}>Checkout</div></div>
       </div>
 
-      <StripeForm
-        total={orderTotal(order)}
-        onSuccess={submitOrder} />
+      <div className="mt-20" ref={ref} >
+        {showCheckout &&
+          <StripeForm
+            total={orderTotal(order)}
+            onSuccess={submitOrder} />
+        }
+      </div>
     </div>
   )
 }

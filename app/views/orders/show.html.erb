@@ -20,12 +20,15 @@
   </div>
 
   <ul>
-    <% @order.items.each do |item| %>
+    <% @order.order_items.order(:created_at).each do |order_item| %>
       <li class="flex border-b py-3">
-        <div><%= item.name %>
+      <%= form_with model: order_item, data: { remote: true } do |f| %>
+        <%= f.check_box :done, class: "item-done-checkbox" %>
+      <% end %>
+        <div><%= order_item.item.name %>
         </div>
         <div class="ml-auto">
-          <%= number_to_currency item.price, unit: "£" %>
+          <%= number_to_currency order_item.item.price, unit: "£" %>
         </div>
       </li>
     <% end %>

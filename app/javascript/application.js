@@ -35,4 +35,12 @@ document.addEventListener("turbo:load", () => {
       form.submit();
     })
   }
+
+  const itemDoneCheckboxes = document.querySelectorAll(".item-done-checkbox");
+  for (let i = 0; i < itemDoneCheckboxes.length; i++) {
+    itemDoneCheckboxes[i].addEventListener("change", (e) => {
+      const form = e.target.closest("form");
+      form.submit();
+    })
+  }
 })

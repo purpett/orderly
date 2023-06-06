@@ -4,27 +4,30 @@
 </div>
 
 <div class="max-w-lg mx-auto">
-  <div>
-    <span class="font-semibold">Name:</span>
-    <%= @order.customer_name %>
-  </div>
+  <div class="font-semibold mb-2">Customer Info</div>
+  <div class="flex mb-6 gap-4">
+    <div>
+      <span class="font-semibold">Name:</span>
+      <%= @order.customer_name %>
+    </div>
 
-  <div>
-    <span class="font-semibold">Email:</span>
-    <%= @order.customer_email %>
-  </div>
+    <div>
+      <span class="font-semibold">Email:</span>
+      <%= @order.customer_email %>
+    </div>
 
-  <div>
-    <span class="font-semibold">Phone:</span>
-    <%= @order.customer_phone %>
+    <div>
+      <span class="font-semibold">Phone:</span>
+      <%= @order.customer_phone %>
+    </div>
   </div>
 
   <ul>
     <% @order.order_items.order(:created_at).each do |order_item| %>
-      <li class="flex border-b py-3">
-      <%= form_with model: order_item, data: { remote: true } do |f| %>
-        <%= f.check_box :done, class: "item-done-checkbox" %>
-      <% end %>
+      <li class="flex border-b py-3 align-middle">
+        <%= form_with model: order_item, data: { remote: true }, class: "flex items-center" do |f| %>
+          <%= f.check_box :done, class: "item-done-checkbox checkbox" %>
+        <% end %>
         <div><%= order_item.item.name %>
         </div>
         <div class="ml-auto">
@@ -34,7 +37,7 @@
     <% end %>
   </ul>
 
-  <div class="flex border-t py-3">
+  <div class="flex border-t py-6">
     <div class="font-bold">Total:</div>
     <div class="ml-auto font-bold">
       <%= number_to_currency @order.total, unit: "£" %>
@@ -42,7 +45,7 @@
   </div>
 
   <%= form_with model: @order do |f| %>
-    <%= f.label :completed, @order.completed ? "Mark as incomplete" : "Mark as completed", for: 'order-complete-checkbox' %>
-    <%= f.check_box :completed, id: "order-complete-checkbox" %>
+    <%= f.label :completed, @order.completed ? "Mark as incomplete" : "Mark as completed", for: 'order-complete-checkbox', class: "mr-2"%>
+    <%= f.check_box :completed, id: "order-complete-checkbox", class: "checkbox" %>
   <% end %>
 </div>

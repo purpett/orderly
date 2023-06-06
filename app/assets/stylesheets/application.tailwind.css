@@ -59,6 +59,10 @@ html {
   @apply -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50;
 }
 
+.checkbox {
+  @apply h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 mr-3;
+}
+
 #qrcode-container svg {
   width: 250px;
   margin: 0 auto;

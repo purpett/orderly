@@ -11,7 +11,7 @@ export default function StripeForm(props) {
   const { total } = props
 
   useEffect(() => {
-    createPayment(total * 100)
+    createPayment(total)
       .then(paymentIntent => setClientSecret(paymentIntent.client_secret))
   }, [total])
 
@@ -26,7 +26,7 @@ export default function StripeForm(props) {
     <div>
       {clientSecret !== "" && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm onSuccess={props.onSuccess} />
         </Elements>
       )}
 

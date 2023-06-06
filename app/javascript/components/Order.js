@@ -50,10 +50,14 @@ export default function Order(props) {
 
       <div className="flex justify-between">
         <div className="cart-button" onClick={clear}>Empty cart</div>
-        <div><div className="primary-button" onClick={submitOrder}>Checkout</div></div>
+        {/* <div><div className="primary-button" onClick={submitOrder}>Checkout</div></div> */}
       </div>
 
-      <StripeForm total={orderTotal(order)} />
+      <StripeForm
+        total={orderTotal(order)}
+        onSuccess={submitOrder} />
     </div>
   )
 }
+
+// https://stripe.com/docs/testing for test card numbers.

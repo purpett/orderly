@@ -28,6 +28,9 @@
       </div>
     </div>
     <%= link_to 'Edit', edit_restaurant_registration_path, class: 'primary-button mt-10' %>
+    <%#<div>
+      Unhappy? 
+      <%= button_to "Cancel my account", restaurant_registration_path(current_restaurant), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete </div>%>
   </div>
 
   <div class="flex-grow text-center">

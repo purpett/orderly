@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  has_many :order_items, dependent: :destroy
   belongs_to :menu_section
 
   validates :name, :price, presence: true

@@ -7,7 +7,7 @@ class Restaurant < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :menu_sections
+  has_many :menu_sections, dependent: :destroy
   has_many :items, through: :menu_sections
-  has_many :orders
+  has_many :orders, dependent: :destroy
 end

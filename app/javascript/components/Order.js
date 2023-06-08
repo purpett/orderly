@@ -47,6 +47,7 @@ export default function Order(props) {
             item={item}
             removeItemFromOrder={props.removeItemFromOrder}
             addItemToOrder={props.addItemToOrder}
+            countItemInOrder={props.countItemInOrder}
           />
         ))}
       </ul>

@@ -1,7 +1,11 @@
 import formatCurrency from "../formatCurrency"
 
 export default function OrderItem(props) {
-  const { countItemInOrder, removeItemFromOrder, addItemToOrder, item } = props
+  const { countItemInOrder, removeItemFromOrder, addItemToOrder, item, quantity } = props
+
+  console.log(quantity)
+  // console.log(order)
+  // console.log(item.id)
 
   const sameItemCount = countItemInOrder(item)
 

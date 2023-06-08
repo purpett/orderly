@@ -33,6 +33,8 @@ export default function Order(props) {
     navigate(`/order-at/${params.slug}/receipts/${orderId}`)
   }
 
+  const uniqueItems = [...new Set(order)]
+
   return (
     <div>
       <Link to={`/order-at/${params.slug}/menu`} className="mb-8 inline-block">
@@ -40,16 +42,22 @@ export default function Order(props) {
         Back to menu
       </Link>
       <h1 className="text-2xl font-semibold mb-10 mt-3">Your order</h1>
+
       <ul>
-        {order.map((item, index) => (
-          <OrderItem
-            key={index}
-            item={item}
-            removeItemFromOrder={props.removeItemFromOrder}
-            addItemToOrder={props.addItemToOrder}
-            countItemInOrder={props.countItemInOrder}
-          />
-        ))}
+        {uniqueItems.map((item, index) => {
+          const quantity = order.filter(orderItem => orderItem.id === item.id).length
+          return (
+            <OrderItem
+              key={index}
+              item={item}
+              order={order}
+              removeItemFromOrder={props.removeItemFromOrder}
+              addItemToOrder={props.addItemToOrder}
+              countItemInOrder={props.countItemInOrder}
+              quantity={quantity}
+            />
+          )
+        })}
       </ul>
 
       <div className="flex font-semibold mt-4 mb-8">

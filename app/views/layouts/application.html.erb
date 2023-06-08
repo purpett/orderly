@@ -11,6 +11,19 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <% if current_restaurant %>
+      <% if !(controller_name == 'orders' && action_name == 'new') %>
+        <%= render 'header' %>
+        <p class="notice text-center text-green-900"><%= notice %></p>
+        <p class="alert text-center text-red-700"><%= alert %></p>
+      <% end%>
+      <div class="mx-auto max-w-7xl px-3">
+        <%= yield %>
+      </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
+
   </body>
 </html>

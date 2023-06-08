@@ -1,0 +1,2 @@
+#Test secret API key
+Stripe.api_key = 'sk_test_51NFL08ATrghIgROvIxXCeOZDeDc9Bj537GvyQJQrwbIkPAD0qd4UzWeEVyil6MGIxBsKVXV9hSlFBW6nAfSpVBWc00ocw4WYIg'

@@ -3,6 +3,7 @@ import formatCurrency from "../formatCurrency"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import StripeForm from "./StripeForm"
 import { useState, useRef } from "react"
+import OrderItem from "./OrderItem"
 
 export default function Order(props) {
   const [showCheckout, setShowCheckout] = useState(false)
@@ -41,16 +42,12 @@ export default function Order(props) {
       <h1 className="text-2xl font-semibold mb-10 mt-3">Your order</h1>
       <ul>
         {order.map((item, index) => (
-          <li key={index} className="flex border-b py-3 gap-4">
-            <div className="flex-1">
-              <h3>{item.name}</h3>
-              <p className="text-sm text-gray-500 break-words">{item.description}</p>
-            </div>
-            <div className="ml-auto">
-              {formatCurrency(item.price)}
-              <button onClick={() => props.removeItemFromOrder(item)} className="ml-3 text-sm text-red-500">Remove</button>
-            </div>
-          </li>
+          <OrderItem
+            key={index}
+            item={item}
+            removeItemFromOrder={props.removeItemFromOrder}
+            addItemToOrder={props.addItemToOrder}
+          />
         ))}
       </ul>
 

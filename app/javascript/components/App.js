@@ -5,13 +5,16 @@ import Menu from "./Menu"
 import Order from "./Order"
 import Receipt from "./Receipt"
 
+// This function will load the customer info from localStorage
 function loadCustomerInfo() {
   const customerInfo = JSON.parse(localStorage.getItem("customerInfo"))
 
+  // If there is customer info in localStorage, return it
   if (customerInfo) {
     return customerInfo
   }
 
+  // Otherwise, return an empty object
   return {
     name: "",
     email: "",
@@ -19,6 +22,7 @@ function loadCustomerInfo() {
   }
 }
 
+// This function will load the order from localStorage
 function loadOrder() {
   const order = JSON.parse(localStorage.getItem("order"))
 
@@ -33,23 +37,28 @@ export default function App() {
   const [customerInfo, setCustomerInfo] = useState(loadCustomerInfo())
   const [order, setOrder] = useState(loadOrder())
 
+  // Save the order info to localStorage on loading and whenever it changes
   useEffect(() => {
     localStorage.setItem("order", JSON.stringify(order))
   }, [order])
 
+  // Save the customer info to localStorage on loading and whenever it changes
   useEffect(() => {
     localStorage.setItem("customerInfo", JSON.stringify(customerInfo))
   }, [customerInfo])
 
+  // Adds item to order by spreading the existing order and adding the new item
   function addItemToOrder(item) {
     setOrder([...order, item])
   }
 
+  // Counts the number of times an item appears in the order
   function countItemInOrder(item) {
     const count = order.filter(orderItem => orderItem.id === item.id).length
     return count > 0 ? `${count}x` : null
   }
 
+  // Removes an item from the order by filtering it out and re-setting the order state
   function removeItemFromOrder(item) {
     const index = order.findIndex(orderItem => orderItem.id === item.id)
     const newOrder = [...order]
@@ -57,12 +66,15 @@ export default function App() {
     setOrder(newOrder)
   }
 
+  // Clears the order from localStorage and resets the order state
   function clearOrder() {
     localStorage.removeItem("order")
     setOrder([])
   }
 
   // This order argument must be the array of items
+  // This function will return the total price of the order 
+  // by using the reduce method to add up the price of each item
   function orderTotal(order) {
     return order.reduce((total, item) => total + item.price, 0)
   }

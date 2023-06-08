@@ -15,7 +15,7 @@
   </div>
 
   <% @menu_sections.each do |menu_section| %>
-    <div id="menu-section-<%= menu_section.id %>">
+    <div id="menu-section-<%= menu_section.id %> mb-6">
       <div class="flex items-center space-x-3 my-8">
         <div class="font-semibold text-xl mr-auto"><%= menu_section.name %></div>
         <%= link_to 'New item', new_menu_section_item_path(menu_section), class: 'primary-button button-small ml-auto' %>  

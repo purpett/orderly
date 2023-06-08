@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// function to get an order from the backend
 export const getOrder = async (slug, orderId) => {
   const response = await axios.get(`/api/restaurants/${slug}/orders/${orderId}`, {
     headers: {

@@ -1,6 +1,8 @@
 import axios from 'axios';
 
+// function to create an order
 export const createOrder = async (slug, customerInfo, order) => {
+  // send a POST request to the `api/orders` endpoint with order details
   const response = await axios.post(`/api/orders`,
     {
       slug: slug,

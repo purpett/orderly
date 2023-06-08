@@ -1,36 +1,76 @@
 <h1 class="mt-10 mb-10 text-3xl font-bold leading-7 text-gray-900">Orders</h1>
 
-<h2 class="font-semibold mb-6 text-2xl">Open Orders</h2>
-<table class="table-fixed min-w-full divide-y divide-gray-300">
-  <thead>
-    <tr>
-      <th scope="col" class="w-1/5 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
-      <th scope="col" class="w-2/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
-      <th scope="col" class="w-1/5px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
-      <th scope="col" class="w-1/5px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
-    </tr>
-  </thead>
-  <tbody class="bg-white">
-    <% @orders.where(completed: false).order(created_at: :desc).each do |order| %>
-      <%= render 'order_row', order: order %>
-    <% end %>
-  </tbody>
-</table>
+<% if current_restaurant.orders.any? && current_restaurant.orders.where(completed: false).any? && current_restaurant.orders.where(completed: true).none? %>
+  <h2 class="font-semibold mb-6 text-2xl">Open Orders</h2>
+  <table class="table-fixed min-w-full divide-y divide-gray-300">
+    <thead>
+      <tr>
+        <th scope="col" class="w-1/5 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
+        <th scope="col" class="w-2/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
+        <th scope="col" class="w-1/5px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
+        <th scope="col" class="w-1/5px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <% @orders.where(completed: false).order(created_at: :desc).each do |order| %>
+        <%= render 'order_row', order: order %>
+      <% end %>
+    </tbody>
+  </table>
 
-<h2 class="font-semibold my-6 text-2xl">Past Orders</h2>
+<% elsif current_restaurant.orders.any? && current_restaurant.orders.where(completed: true).any? && current_restaurant.orders.where(completed: false).none? %>
+  <h2 class="font-semibold my-6 text-2xl">Past Orders</h2>
+  <table class="table-fixed min-w-full divide-y divide-gray-300">
+    <thead>
+      <tr>
+        <th scope="col" class="w-1/5 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
+        <th scope="col" class="w-2/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
+        <th scope="col" class="w-1/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
+        <th scope="col" class="w-1/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <% @orders.where(completed: true).order(created_at: :desc).each do |order| %>
+        <%= render 'order_row', order: order %>
+      <% end %>
+    </tbody>
+  </table>
+<% elsif current_restaurant.orders.any? && current_restaurant.orders.where(completed: true).any? && current_restaurant.orders.where(completed: false).any? %>
+  <h2 class="font-semibold mb-6 text-2xl">Open Orders</h2>
+  <table class="table-fixed min-w-full divide-y divide-gray-300">
+    <thead>
+      <tr>
+        <th scope="col" class="w-1/5 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
+        <th scope="col" class="w-2/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
+        <th scope="col" class="w-1/5px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
+        <th scope="col" class="w-1/5px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <% @orders.where(completed: false).order(created_at: :desc).each do |order| %>
+        <%= render 'order_row', order: order %>
+      <% end %>
+    </tbody>
+  </table>
 
-<table class="table-fixed min-w-full divide-y divide-gray-300">
-  <thead>
-    <tr>
-      <th scope="col" class="w-1/5 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
-      <th scope="col" class="w-2/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
-      <th scope="col" class="w-1/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
-      <th scope="col" class="w-1/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
-    </tr>
-  </thead>
-  <tbody class="bg-white">
-    <% @orders.where(completed: true).order(created_at: :desc).each do |order| %>
-      <%= render 'order_row', order: order %>
-    <% end %>
-  </tbody>
+  <h2 class="font-semibold my-6 text-2xl">Past Orders</h2>
+  <table class="table-fixed min-w-full divide-y divide-gray-300">
+    <thead>
+      <tr>
+        <th scope="col" class="w-1/5 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-3">#</th>
+        <th scope="col" class="w-2/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Customer</th>
+        <th scope="col" class="w-1/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Total</th>
+        <th scope="col" class="w-1/5 px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Completed</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <% @orders.where(completed: true).order(created_at: :desc).each do |order| %>
+        <%= render 'order_row', order: order %>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="text-center">You have no orders yet.</p>
+<% end%>
+
 </table>

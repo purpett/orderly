@@ -8,11 +8,6 @@ export default function MenuItems(props) {
     addItemToOrder(item)
   }
 
-  function countItemInOrder(item) {
-    const count = order.filter(orderItem => orderItem.id === item.id).length
-    return count > 0 ? `${count}x` : null
-  }
-
   function isItemInOrder(item) {
     return order.find(orderItem => orderItem.id === item.id)
   }
@@ -26,7 +21,7 @@ export default function MenuItems(props) {
             {section.items.map((item, index) => (
               <li key={index} onClick={() => add(item)} className={`flex py-5 border-b cursor-pointer gap-6`}>
                 <div className={`${isItemInOrder(item) ? "border-l border-l-2 pl-2" : ""}`}>
-                  <h3 className="font-semibold">{countItemInOrder(item)} {item.name}</h3>
+                  <h3 className="font-semibold">{props.countItemInOrder(item)} {item.name}</h3>
                   <p className="text-gray-500">{item.description}</p>
                 </div>
                 <p className="ml-auto">{formatCurrency(item.price)}</p>

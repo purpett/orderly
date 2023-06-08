@@ -29,7 +29,6 @@ function loadOrder() {
   return []
 }
 
-
 export default function App() {
   const [customerInfo, setCustomerInfo] = useState(loadCustomerInfo())
   const [order, setOrder] = useState(loadOrder())
@@ -44,6 +43,11 @@ export default function App() {
 
   function addItemToOrder(item) {
     setOrder([...order, item])
+  }
+
+  function countItemInOrder(item) {
+    const count = order.filter(orderItem => orderItem.id === item.id).length
+    return count > 0 ? `${count}x` : null
   }
 
   function removeItemFromOrder(item) {
@@ -66,17 +70,37 @@ export default function App() {
   return (
     <div className="max-w-lg mx-auto py-8 px-3">
       <Routes>
-        <Route path="order-at/:slug" element={<CustomerDetails customerInfo={customerInfo} setCustomerInfo={setCustomerInfo} />} />
-        <Route path="order-at/:slug/menu" element={<Menu order={order} addItemToOrder={addItemToOrder} orderTotal={orderTotal} />} />
+        <Route path="order-at/:slug"
+          element={
+            <CustomerDetails
+              customerInfo={customerInfo}
+              setCustomerInfo={setCustomerInfo}
+            />
+          }
+        />
+        <Route path="order-at/:slug/menu"
+          element={
+            <Menu
+              order={order}
+              addItemToOrder={addItemToOrder}
+              orderTotal={orderTotal}
+              countItemInOrder={countItemInOrder}
+            />
+          }
+        />
         <Route
           path="order-at/:slug/cart"
           element={
             <Order
               order={order}
               customerInfo={customerInfo}
+              addItemToOrder={addItemToOrder}
               removeItemFromOrder={removeItemFromOrder}
               clearOrder={clearOrder}
-              orderTotal={orderTotal} />}
+              orderTotal={orderTotal}
+              countItemInOrder={countItemInOrder}
+            />
+          }
         />
         <Route
           path="order-at/:slug/receipts/:orderId"
@@ -85,7 +109,8 @@ export default function App() {
               order={order}
               customerInfo={customerInfo}
               orderTotal={orderTotal}
-            />}
+            />
+          }
         />
       </Routes>
     </div>

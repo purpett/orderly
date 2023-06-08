@@ -26,6 +26,7 @@ export default function Menu(props) {
       <MenuItems
         restaurantInfo={restaurantInfo}
         addItemToOrder={props.addItemToOrder}
+        countItemInOrder={props.countItemInOrder}
         order={order}
       />
     </div>

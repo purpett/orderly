@@ -12,12 +12,14 @@ export default function Order(props) {
   const params = useParams()
   const ref = useRef(null)
 
+  // function to clear the order and redirect to the menu (previous page)
   function clear() {
     props.clearOrder()
 
     navigate(-1)
   }
 
+  // function to toggle the checkout form, and scroll to it when it appears
   const toggleCheckout = () => {
     setShowCheckout(!showCheckout)
     setTimeout(() => {
@@ -25,6 +27,7 @@ export default function Order(props) {
     }, 1000)
   }
 
+  // function to submit the order to the backend by calling the createOrder api function
   async function submitOrder() {
     const createdOrder = await createOrder(params.slug, customerInfo, order)
     const orderId = createdOrder.id
@@ -33,6 +36,7 @@ export default function Order(props) {
     navigate(`/order-at/${params.slug}/receipts/${orderId}`)
   }
 
+  // get the unique items in the order array
   const uniqueItems = [...new Set(order)]
 
   return (
@@ -44,6 +48,7 @@ export default function Order(props) {
       <h1 className="text-2xl font-semibold mb-10 mt-3">Your order</h1>
 
       <ul>
+        {/* map over the unique items in the order array to render each item */}
         {uniqueItems.map((item, index) => {
           const quantity = order.filter(orderItem => orderItem.id === item.id).length
           return (
@@ -62,6 +67,8 @@ export default function Order(props) {
 
       <div className="flex font-semibold mt-4 mb-8">
         <div>Total</div>
+        {/* formatCurrency is a function that takes a number and returns a string in the format of a currency */}
+        {/* orderTotal is a function that takes an array of items and returns the total price of the order */}
         <div className="ml-auto">{formatCurrency(orderTotal(order))}</div>
       </div>
 

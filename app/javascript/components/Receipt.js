@@ -9,6 +9,7 @@ export default function Receipt(props) {
   const [order, setOrder] = useState({ items: [] })
   const params = useParams()
 
+  // load the restaurant info and order info on page load by calling the getRestaurant and getOrder api functions
   useEffect(() => {
     getRestaurant(params.slug).then(data => setRestaurantInfo(data))
   }, [])

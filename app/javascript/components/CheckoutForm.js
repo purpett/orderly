@@ -13,18 +13,22 @@ export default function CheckoutForm(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    // Check if stripe is loaded
     if (!stripe) {
       return;
     }
 
+    // Retrieve the client secret from the URL query parameters
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
 
+    // If there is no client secret, we can't confirm the payment
     if (!clientSecret) {
       return;
     }
 
+    // Retrieve the PaymentIntent from Stripe and handle its status
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
@@ -46,6 +50,7 @@ export default function CheckoutForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Check if Stripe and Elements are loaded
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -54,13 +59,16 @@ export default function CheckoutForm(props) {
 
     setIsLoading(true);
 
+    // Confirm the payment with Stripe
     const { error } = await stripe.confirmPayment({
       elements,
       redirect: 'if_required',
       confirmParams: {
+        // Additional parameters for the payment confirmation
       },
     });
 
+    // Handle any errors from Stripe
     if (error) {
       if (error.type === "card_error" || error.type === "validation_error") {
         setMessage(error.message);

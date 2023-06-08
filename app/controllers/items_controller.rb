@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = @menu_section.items.build
+    @item = @menu_section.items.build   # build is like new, but it also sets the menu_section_id
   end
 
   def create

@@ -50,7 +50,6 @@ export default function Order(props) {
       <ul>
         {/* map over the unique items in the order array to render each item */}
         {uniqueItems.map((item, index) => {
-          const quantity = order.filter(orderItem => orderItem.id === item.id).length
           return (
             <OrderItem
               key={index}
@@ -59,7 +58,6 @@ export default function Order(props) {
               removeItemFromOrder={props.removeItemFromOrder}
               addItemToOrder={props.addItemToOrder}
               countItemInOrder={props.countItemInOrder}
-              quantity={quantity}
             />
           )
         })}

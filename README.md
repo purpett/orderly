@@ -220,11 +220,6 @@ This project has led me to research, learn, and implement a great deal of things
 * I feel somewhat comfortable using Axios instead of Fetch.
 * I know how to use the `new Set()` method to create a set of unique items from an array. 
 
-
-## Bugs
-
-* On the restaurant’s menu page, the edit menu section and edit menu item do not work. They return a 500 Internal Server Error. 
-
 # Future Improvements
 
 * I would like to add a generic landing page, instead of the login/sign up page.
